@@ -5,6 +5,8 @@
 %% -------------------------------
 %% Additions by: David Dauer, IM, 2011
 %% dauer@iism.uni-karlsruhe.de
+%% Further additions by: Philipp Stroehle, IM, 2013 
+%% philipp.stroehle "at" kit.edu
 
 %% Notes:
 %% Language switch after \begin{document}
@@ -26,6 +28,7 @@
 % forget trailing slash '/'
 % \usepackage{epstopdf} %Nice to automatically convert eps figures to pdf
 % format  (from inkscape, etc)
+\usepackage[printonlyused]{acronym} %http://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Abk%C3%BCrzungsverzeichnis
 \usepackage{}
 
 
@@ -33,8 +36,13 @@
 %% | Information about the thesis  |
 %% ---------------------------------
 
-\newcommand{\mytype}{\iflanguage{english}{Seminar Thesis}{Seminararbeit}} % (Seminar|Bachelor|Master) Thesis
+% uncomment one of the following, according to your thesis
+\newcommand{\mytype}{\iflanguage{english}{Bachelor Thesis}{Bachelorarbeit}} 
+%\newcommand{\mytype}{\iflanguage{english}{Master's Thesis}{Masterarbeit}} 
+%\newcommand{\mytype}{\iflanguage{english}{Seminar Thesis}{Seminararbeit}} 
+
 \newcommand{\myname}{Vorname Nachname}
+\newcommand{\matricle}{1234567}
 \newcommand{\mytitle}{\iflanguage{english}{Title}{Titel der Arbeit}}
 \newcommand{\myinstitute}{\iflanguage{english}
 {Institute of Information Systems and Marketing (IISM) \\
@@ -42,13 +50,13 @@ Information \& Market Engineering}
 {Institut für Informationswirtschaft und Marketing (IISM) \\
 Information \& Market Engineering}}
 
-\newcommand{\reviewerone}{Prof. Dr. rer. pol. Christof Weinhardt}
+\newcommand{\reviewerone}{Prof. Dr. Christof Weinhardt}
 \newcommand{\reviewertwo}{Vorname Nachname}
 \newcommand{\advisor}{Vorname Nachname}
 \newcommand{\advisortwo}{}
 
-\newcommand{\timestart}{XX. Monat 20XX}
-\newcommand{\timeend}{XX. Monat 20XX}
+\newcommand{\timestart}{\iflanguage{english}{XX. Month 20XX}{XX. Monat 20XX}}
+\newcommand{\timeend}{\iflanguage{english}{XXth of Month 20XX}{XX. Monat 20XX}}
 \newcommand{\submissiontime}{DD. MM. 20XX}
 
 %% -------------------------------
@@ -127,7 +135,7 @@ text/appendix
 \begin{document}
 
 % Comment the following line out for German text
-% \selectlanguage{english}
+%\selectlanguage{english}
 
 \frontmatter
 \pagenumbering{roman}
@@ -142,6 +150,40 @@ text/appendix
 \tableofcontents
 % IM Style: No additional blank page
 % \blankpage
+
+% Do not include a list of figures, if the work is a seminar thesis
+\iflanguage{english}{
+\ifthenelse{\equal{\mytype}{Seminar Thesis}}
+{}
+{\listoffigures}
+}
+{
+\ifthenelse{\equal{\mytype}{Seminararbeit}}
+{}
+{\listoffigures}}
+
+\newpage
+% Do not include a List of Abbreviations, if the work is a seminar thesis.
+\iflanguage{english}
+{ % english
+\ifthenelse{\equal{\mytype}{Seminar Thesis}}
+	{}
+	{\input{text/abbreviations}}
+}
+{ %german
+\ifthenelse{\equal{\mytype}{Seminararbeit}}
+{}
+{\input{text/abbreviations}}
+}
+
+
+% \begin{acronym}[SQL]
+%  \acro{KDE}{K Desktop Environment}
+%  \acro{SQL}{Structured Query Language}
+%  \acro{Bash}{Bourne-again shell}
+% \end{acronym}
+
+
 
 
 %% -----------------
@@ -174,8 +216,10 @@ text/appendix
 
 % IM Style
 \iflanguage{english}
-{\bibliographystyle{chicago}}	% english style
+{\bibliographystyle{alpha}}	% english style
 {\bibliographystyle{chicagode}}	% german style
+
+%
 
 % Informatik-Style
 %\iflanguage{english}

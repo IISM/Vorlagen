@@ -28,8 +28,24 @@
 % forget trailing slash '/'
 % \usepackage{epstopdf} %Nice to automatically convert eps figures to pdf
 % format  (from inkscape, etc)
-\usepackage[printonlyused]{acronym} %http://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Abk%C3%BCrzungsverzeichnis
 \usepackage{}
+
+
+%% ---------------------------------
+%% | Needed for the List of Abbreviations |
+%% ---------------------------------
+\usepackage{nomencl}
+\renewcommand{\nomname}{List of Abbreviations}
+% Punkte zw. Abkürzung und Erklärung
+\setlength{\nomlabelwidth}{.32\hsize}%.32\hsize bezieht sich auf die Punkte zwischen Abkürzung und Erklärung -> je größer die Zahl, desto mehr %Punkte
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+% Zeilenabstände verkleinern
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+\usepackage[normalem]{ulem}
+\newcommand{\markup}[1]{\uline{#1}}
+
+
 
 
 %% ---------------------------------
@@ -121,6 +137,7 @@ Information \& Market Engineering}}
 % Userful command for partially translating the document (for bug-fixing e.g.)
 \includeonly{%
 titlepage,
+text/abbreviations,
 text/introduction,
 text/content,
 text/evaluation,
@@ -149,40 +166,34 @@ text/appendix
 %% -------------------
 \tableofcontents
 % IM Style: No additional blank page
-% \blankpage
+% \blankpaage
 
-% Do not include a list of figures, if the work is a seminar thesis
+% Do not include a list of figures, list of tables and list of abbreviations, if the work is a seminar thesis
 \iflanguage{english}{
 \ifthenelse{\equal{\mytype}{Seminar Thesis}}
 {}
-{\listoffigures}
+{
+\listoffigures \newpage \addcontentsline{toc}{section}{List of Figures} 
+\listoftables  \addcontentsline{toc}{section}{List of Tables} 
+\printnomenclature  \addcontentsline{toc}{section}{List of Abbreviations} 
+}
 }
 {
 \ifthenelse{\equal{\mytype}{Seminararbeit}}
 {}
-{\listoffigures}}
-
-\newpage
-% Do not include a List of Abbreviations, if the work is a seminar thesis.
-\iflanguage{english}
-{ % english
-\ifthenelse{\equal{\mytype}{Seminar Thesis}}
-	{}
-	{\input{text/abbreviations}}
+{
+\listoffigures \addcontentsline{toc}{section}{Abbildungsverzeichnis} 
+\listoftables \addcontentsline{toc}{section}{Tabellenverzeichnis} 
+\printnomenclature \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+\markboth{List of Abbreviations}{\printnomenclature} 
+ \noindent
 }
-{ %german
-\ifthenelse{\equal{\mytype}{Seminararbeit}}
-{}
-{\input{text/abbreviations}}
 }
 
 
-% \begin{acronym}[SQL]
-%  \acro{KDE}{K Desktop Environment}
-%  \acro{SQL}{Structured Query Language}
-%  \acro{Bash}{Bourne-again shell}
-% \end{acronym}
 
+
+%\printnomenclature
 
 
 

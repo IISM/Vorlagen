@@ -5,6 +5,8 @@
 %% -------------------------------
 %% Additions by: David Dauer, IM, 2011
 %% dauer@iism.uni-karlsruhe.de
+%% Further additions by: Philipp Stroehle, IM, 2013 
+%% philipp.stroehle "at" kit.edu
 
 %% Notes:
 %% Language switch after \begin{document}
@@ -30,11 +32,33 @@
 
 
 %% ---------------------------------
+%% | Needed for the List of Abbreviations |
+%% ---------------------------------
+\usepackage{nomencl}
+\renewcommand{\nomname}{List of Abbreviations}
+% Punkte zw. Abkürzung und Erklärung
+\setlength{\nomlabelwidth}{.32\hsize}%.32\hsize bezieht sich auf die Punkte zwischen Abkürzung und Erklärung -> je größer die Zahl, desto mehr %Punkte
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+% Zeilenabstände verkleinern
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+\usepackage[normalem]{ulem}
+\newcommand{\markup}[1]{\uline{#1}}
+
+
+
+
+%% ---------------------------------
 %% | Information about the thesis  |
 %% ---------------------------------
 
-\newcommand{\mytype}{\iflanguage{english}{Seminar Thesis}{Seminararbeit}} % (Seminar|Bachelor|Master) Thesis
+% uncomment one of the following, according to your thesis
+\newcommand{\mytype}{\iflanguage{english}{Bachelor Thesis}{Bachelorarbeit}} 
+%\newcommand{\mytype}{\iflanguage{english}{Master's Thesis}{Masterarbeit}} 
+%\newcommand{\mytype}{\iflanguage{english}{Seminar Thesis}{Seminararbeit}} 
+
 \newcommand{\myname}{Vorname Nachname}
+\newcommand{\matricle}{1234567}
 \newcommand{\mytitle}{\iflanguage{english}{Title}{Titel der Arbeit}}
 \newcommand{\myinstitute}{\iflanguage{english}
 {Institute of Information Systems and Marketing (IISM) \\
@@ -42,13 +66,13 @@ Information \& Market Engineering}
 {Institut für Informationswirtschaft und Marketing (IISM) \\
 Information \& Market Engineering}}
 
-\newcommand{\reviewerone}{Prof. Dr. rer. pol. Christof Weinhardt}
+\newcommand{\reviewerone}{Prof. Dr. Christof Weinhardt}
 \newcommand{\reviewertwo}{Vorname Nachname}
 \newcommand{\advisor}{Vorname Nachname}
 \newcommand{\advisortwo}{}
 
-\newcommand{\timestart}{XX. Monat 20XX}
-\newcommand{\timeend}{XX. Monat 20XX}
+\newcommand{\timestart}{\iflanguage{english}{XX. Month 20XX}{XX. Monat 20XX}}
+\newcommand{\timeend}{\iflanguage{english}{XXth of Month 20XX}{XX. Monat 20XX}}
 \newcommand{\submissiontime}{DD. MM. 20XX}
 
 %% -------------------------------
@@ -113,6 +137,7 @@ Information \& Market Engineering}}
 % Userful command for partially translating the document (for bug-fixing e.g.)
 \includeonly{%
 titlepage,
+text/abbreviations,
 text/introduction,
 text/content,
 text/evaluation,
@@ -127,7 +152,7 @@ text/appendix
 \begin{document}
 
 % Comment the following line out for German text
-% \selectlanguage{english}
+\selectlanguage{english}
 
 \frontmatter
 \pagenumbering{roman}
@@ -141,7 +166,37 @@ text/appendix
 %% -------------------
 \tableofcontents
 % IM Style: No additional blank page
-% \blankpage
+% \blankpaage
+
+% Do not include a list of figures, list of tables and list of abbreviations, if the work is a seminar thesis
+\iflanguage{english}{
+\ifthenelse{\equal{\mytype}{Seminar Thesis}}
+{}
+{
+\listoffigures \addcontentsline{toc}{chapter}{List of Figures} 
+\listoftables  \addcontentsline{toc}{chapter}{List of Tables} 
+\printnomenclature   \addcontentsline{toc}{chapter}{List of Abbreviations} 
+}
+}
+{
+\ifthenelse{\equal{\mytype}{Seminararbeit}}
+{}
+{
+\listoffigures \addcontentsline{lof}{chapter}{Abbildungsverzeichnis} 
+\listoftables \addcontentsline{lot}{chapter}{Tabellenverzeichnis} 
+\printnomenclature \addcontentsline{loa}{chapter}{Abkürzungsverzeichnis}
+\markboth{List of Abbreviations}{\printnomenclature} 
+ \noindent
+}
+}
+
+% Execute this command for index creation, i.e., for abbreviations by the nomencl package
+% makeindex thesis.nlo -s nomencl.ist -o thesis.nls
+
+
+
+%\printnomenclature
+
 
 
 %% -----------------
@@ -176,6 +231,8 @@ text/appendix
 \iflanguage{english}
 {\bibliographystyle{chicago}}	% english style
 {\bibliographystyle{chicagode}}	% german style
+
+%
 
 % Informatik-Style
 %\iflanguage{english}

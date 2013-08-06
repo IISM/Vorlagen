@@ -14,7 +14,7 @@
 \LoadClass[a4paper,11pt,titlepage,openany]{scrbook}	% Class based on scrbook
 % IM Style: Add openany to avoid blank pages after every chapter
 
-\RequirePackage{ngerman}										% New german orthography
+%\RequirePackage{ngerman}										% New german orthography
 
 
 

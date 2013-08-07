@@ -2,7 +2,7 @@
 %%
 
 %% ==============
-\chapter{Content Chapter 1}
+\chapter{Content Chapter}
 \label{ch:Content1}
 %% ==============
 
@@ -20,8 +20,10 @@ Of course, you can split this .tex file into several files if you prefer.
 
 \dots
 
-This is an abbreviation.
-Die Abkürzung etc.\nomenclature{etc.}{et cetera} steht im Abkürzungsverzeichnis.
+\iflanguage{english}
+{The abbreviation etc. \nomenclature{etc.}{et cetera} can be viewed in the list of abbreviations.}
+{Die Abkürzung etc.\nomenclature{etc.}{et cetera} steht im Abkürzungsverzeichnis.}
+
 
 
 %% ===========================
@@ -29,28 +31,30 @@ Die Abkürzung etc.\nomenclature{etc.}{et cetera} steht im Abkürzungsverzeichni
 \label{ch:Content1:sec:Section2}
 %% ===========================
 
-\dots
-
-\begin{table}
-\begin{center}
-\begin{tabular}{lll}
-1 & 2 & 3\\
-4 & 5 & 6\\
-7 & 8 & 9
+\begin{table}[htb]
+\centering
+\begin{tabular}{llr}
+\toprule
+\multicolumn{2}{c}{Item} \\
+\cmidrule(r){1-2}
+Animal    & Description & Price (\$) \\
+\midrule
+Gnat      & per gram    & 13.65      \\
+          & each        & 0.01       \\
+Gnu       & stuffed     & 92.50      \\
+Emu       & stuffed     & 33.33      \\
+Armadillo & frozen      & 8.99       \\
+\bottomrule
 \end{tabular}
-\end{center}
 \caption{A table}
 \end{table}
-
-
-
 
 
 %% content.tex
 %%
 
 %% ==============
-\chapter{Content Chapter 2}
+\chapter{Next Content Chapter}
 \label{ch:Content2}
 %% ==============
 

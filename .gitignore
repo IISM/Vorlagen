@@ -29,10 +29,7 @@
 *.toc
 *.vrb
 *.xdy
-<<<<<<< HEAD
 *.tdo
-=======
-*.tdo/IISM_Template_Word/IISM_Template_2012_Deutsch.docx.orig
+.DS_Store
 /IISM_Template_Word/IISM_Template_2012_English.docx.orig
 /IISM_Template_Word/IISM_Template_2012_Deutsch.docx.orig
->>>>>>> 4cf29d187e8dc264b6f6e261ad23ead2e0a4c4d1

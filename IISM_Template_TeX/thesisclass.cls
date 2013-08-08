@@ -33,7 +33,6 @@
 \usepackage{url}
 \usepackage[absolute,overlay]{textpos}
 \usepackage{tikz}
-\usepackage[english,ngerman]{babel}
 \usepackage{algorithm}		  % Code-Listings
 \usepackage{algorithmic}	  % Code-Listings
 % see http://www.ctan.org/tex-archive/macros/latex/contrib/algorithm2e/algorithm2e.pdf
@@ -52,14 +51,11 @@
 						linkbordercolor={0 0.61 0.50},   
 						citebordercolor={0 0.61 0.50}]{hyperref}  %{0.57 0.74 0.57}
 						
-\usepackage[fixlanguage]{babelbib}	% sets german style for literature entries
-\selectbiblanguage{ngerman}			% for \bibliographystyle{babalpha}
-
 %% IM Packages
 \usepackage{setspace} % 1.5 line spacing
 \onehalfspacing
 
-\usepackage{natbib} % Bibliography style
+%\usepackage{natbib} % Bibliography style
 
 %% --- End of Packages ---
 
@@ -180,8 +176,8 @@
 \newlength{\chapparlen}
 \newsavebox{\chapno}
 \renewcommand{\@makechapterhead}[1]{
-  \vspace*{0.2\textheight}
-  \vskip 15\p@
+  %\vspace*{0.2\textheight}
+  %\vskip 15\p@
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
       \if@mainmatter
@@ -196,7 +192,7 @@
     \addtolength{\chapparlen}{-2ex}
     \leavevmode\nobreak
     \parbox[t]{\chapparlen}{\raggedright\chapterheadfont\huge \bfseries #1\par\nobreak}
-    \vskip 40\p@
+    %\vskip 40\p@
   }}
 
 \renewcommand{\@makeschapterhead}[1]{
